@@ -1,6 +1,7 @@
 # scheduler
-
-GENERAL USAGE
-----------------------------------------------------------------------------
-Login with phone and password
-make post request to get schedules with filters
+REST API for scheduling tasks
+# Installation
+.git clone
+.cd into the folder
+.npm i
+.npm start
