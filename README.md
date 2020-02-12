@@ -4,7 +4,7 @@ REST API for scheduling tasks
 
 ```sh
 $ git clone
-$ cd into the folder
+$ cd <folder>
 $ npm i
 $ npm start
 ```
