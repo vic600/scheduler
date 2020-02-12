@@ -1,7 +1,12 @@
 # scheduler
 REST API for scheduling tasks
 # Installation
-.git clone
-.cd into the folder
-.npm i
-.npm start
+
+```sh
+$ git clone
+$ cd into the folder
+$ npm i
+$ npm start
+```
+
+
