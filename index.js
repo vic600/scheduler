@@ -17,6 +17,10 @@ db.authenticate()
 app.get('/', (req, res) => {
     res.send('index')
 })
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use('/schedules',require('./routes/routes'))
 app.listen(port, (err) => {
     if (err) {
         console.log(`server failed ${err}`);
