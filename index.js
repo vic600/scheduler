@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path')
 const app = express();
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3000
 const db = require('./config/db');
 db.authenticate()
     .then(() => {
@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use('/schedules',require('./routes/routes'))
+app.use('/schedules', require('./routes/routes'))
 app.listen(port, (err) => {
     if (err) {
         console.log(`server failed ${err}`);
@@ -30,3 +30,5 @@ app.listen(port, (err) => {
 
     }
 })
+
+module.exports = app;

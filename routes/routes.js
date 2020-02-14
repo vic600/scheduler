@@ -5,7 +5,7 @@ const schedule = require('../models/schedule')
 router.get('/', (req, res) => {
     schedule.findAll().then((s) => {
      
-        res.json({ s })
+        res.json({ tests:s })
 
     }).catch((err) => {
         
