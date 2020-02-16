@@ -1,10 +1,10 @@
 const request = require('supertest');
 const app = require('../index.js')
 
-describe('GET /user', function () {
+describe('GET /tasks', function () {
     it('responds with json', function (done) {
         request(app)
-            .get('/schedules')
+            .get('/tasks')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200, function (err) {

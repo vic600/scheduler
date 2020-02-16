@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const schedule = require('../models/schedule')
+const user = require('../models/user')
+const bcrypt = require('bcrypt');
+const passport=require('passport');
+const config=require('../config/jwt')
+const jwt=require('jsonwebtoken');
+
 
 router.get('/', (req, res) => {
     schedule.findAll().then((s) => {
-     
-        res.json({ tests:s })
+
+        res.json({ tasks: s })
 
     }).catch((err) => {
-        
-        res.json({success:false,message:err.errors})
+
+        res.json({ success: false, message: err.errors })
     })
 });
 
@@ -89,11 +95,11 @@ router.post('/', (req, res) => {
             access_code, age, agent_id, assigned, autoplay, comments, completed, customer_first_name, customer_last_name, customer_phone, deferred, gender, in_progress, location, mpesa, personel_first_name, personel_other_name, splash_page, status, task_id, registration
 
         }).then((data) => {
-           res.json({success:true,message:data})
-        
+            res.json({ success: true, message: data })
+
         }).catch((err) => {
-            
-            res.json({success:false,message:err})
+
+            res.json({ success: false, message: err })
 
         })
     }
