@@ -1,12 +1,13 @@
 # scheduler
-REST API for scheduling tasks
+Sample React ,Postgresql and Node App 
 # Installation
 
 ```sh
 $ git clone
 $ cd <folder>
 $ npm i
-$ npm start
+$ npm client-install
+$ npm dev
 ```
 
 
