@@ -5,11 +5,9 @@ const User = db.define('users', {
     phone: {
         type: sequelize.BIGINT
     },
-    email: {
+    firstname: {
         type: sequelize.STRING,
-        validate: {
-            isEmail: true
-        }
+       
     },
     password: {
         type: sequelize.STRING

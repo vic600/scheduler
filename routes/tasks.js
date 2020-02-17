@@ -8,14 +8,31 @@ const config=require('../config/jwt')
 const jwt=require('jsonwebtoken');
 
 
-router.get('/', (req, res) => {
-    schedule.findAll().then((s) => {
+router.get('/:page/:limit/:order/:ordermethod', (req, res) => {
+   // console.log(req.user.firstname);
+    
+    // schedule.findAll().then((s) => {
 
-        res.json({ tasks: s })
+    //     res.json({ tasks: s })
 
-    }).catch((err) => {
+    // }).catch((err) => {
 
-        res.json({ success: false, message: err.errors })
+    //     res.json({ success: false, message: err.errors })
+    // })
+    let page = req.params.page;      // page number
+    //let pages = Math.ceil(data.count / limit);
+	offset = req.params.limit * (page - 1);
+    schedule.findAndCountAll({
+        where:{personel_first_name:req.user.firstname},
+        offset:offset,
+        limit:req.params.limit,
+        order:[[req.params.order,]]
+    }).then((task)=>{
+        console.log(task);
+        
+        res.json({totalTasks:task.count,page:req.params.page,perPage:req.params.limit,tasks:task.rows})
+    }).catch((err)=>{
+        res.json({error:err})
     })
 });
 

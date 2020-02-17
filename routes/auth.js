@@ -8,15 +8,15 @@ const jwt=require('jsonwebtoken');
 
 
 router.post('/signup', (req, res) => {
-    let { phone, email, password } = req.body;
+    let { phone, firstname, password } = req.body;
     let errors = []
     
       
     if (!phone || phone.length < 10) {
         errors.push({ message: 'provide a valid phone' })
     }
-    if (!email || email.length < 10) {
-        errors.push({ message: 'no email provided' })
+    if (!firstname || firstname.length < 3) {
+        errors.push({ message: 'provide a valid firstname' })
     }
     if (!password || password.length < 6) {
         errors.push({ message: 'provide a valid password' })
@@ -31,18 +31,21 @@ router.post('/signup', (req, res) => {
         user.findOne({ where: { phone: phone}}).then((email) => {
 
 
-            if (email) {
+            if (!email) {
+               
+                bcrypt.hash(password, 8, function (err, hash) {
+                    console.log(phone, email, hash);
+    
+                    user.create({
+                        phone: req.body.phone, firstname: req.body.firstname, password: hash
+                    }).then((user) => {
+                        res.json({ success: true, message:`Account ${user.firstname} created `  })
+                    }).catch(err => { res.json({ success: false, message: err }) })
+                });
+            }else{
                 res.json({ success: false, message: 'Account in use' })
             }
-            bcrypt.hash(password, 8, function (err, hash) {
-                console.log(phone, email, hash);
-
-                user.create({
-                    phone: req.body.phone, email: req.body.email, password: hash
-                }).then((user) => {
-                    res.json({ success: true, user: user })
-                }).catch(err => { res.json({ success: false, message: err }) })
-            });
+          
         }).catch(err => { res.json({ success: false, message: err }) })
     }
 
